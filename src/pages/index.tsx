@@ -2,8 +2,22 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
+import { useAccount, useChainId, useSignMessage } from 'wagmi';
+import { useEffect } from 'react';
 
 const Home: NextPage = () => {
+  const account = useAccount();
+  const chainId = useChainId()
+  const { signMessageAsync } = useSignMessage()
+
+  useEffect(() => {
+    console.log({ account })
+  }, [account])
+
+  useEffect(() => {
+    console.log({ chainId })
+  }, [chainId])
+
   return (
     <div className={styles.container}>
       <Head>
@@ -17,6 +31,8 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <ConnectButton />
+
+        {!!signMessageAsync && <button onClick={() => signMessageAsync({ message: 'sign test msg' })}>sign msg</button>}
 
         <h1 className={styles.title}>
           Welcome to <a href="">RainbowKit</a> + <a href="">wagmi</a> +{' '}
