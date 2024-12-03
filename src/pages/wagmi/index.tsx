@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { WagmiProvider, createConfig, createConnector, useAccount, useChainId, useConnect, useConnections, useConnectors, useSignMessage } from 'wagmi';
+import { WagmiProvider, createConfig, createConnector, useAccount, useChainId, useConnect, useConnections, useConnectors, useDisconnect, useSignMessage } from 'wagmi';
 import { arbitrum, base, Chain, mainnet, optimism, polygon } from 'viem/chains';
 import { EIP1193Provider } from 'viem/_types/types/eip1193';
 import { injected } from 'wagmi/connectors';
@@ -56,10 +56,9 @@ const client = new QueryClient();
 
 
 const WagmiDemo: NextPage = () => {
-  const {address} = useAccount();
-  const { connect, connectors } = useConnect({
-  });
-  const chainId = useChainId()
+  const { address } = useAccount();
+  const { connect, connectors } = useConnect();
+  const { disconnect } = useDisconnect();
   const { signMessageAsync } = useSignMessage()
 
   return (
@@ -83,6 +82,8 @@ const WagmiDemo: NextPage = () => {
               ))
             }
           </div>
+
+          <button onClick={() => { disconnect() }}>disconnect</button>
 
           <div>
             <h3>{address}</h3>
