@@ -98,11 +98,6 @@ const WagmiDemo: NextPage = () => {
           Next.js!
         </h1>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.tsx</code>
-        </p>
-
       </main>
     </div>
   );
