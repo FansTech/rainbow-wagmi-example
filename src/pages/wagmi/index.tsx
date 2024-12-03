@@ -57,7 +57,6 @@ const client = new QueryClient();
 
 const WagmiDemo: NextPage = () => {
   const {address} = useAccount();
-  const connections = useConnections()
   const { connect, connectors } = useConnect({
   });
   const chainId = useChainId()
@@ -86,7 +85,7 @@ const WagmiDemo: NextPage = () => {
           </div>
 
           <div>
-            {address}
+            <h3>{address}</h3>
             <div>account</div>
           </div>
 
