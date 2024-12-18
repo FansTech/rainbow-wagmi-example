@@ -56,7 +56,7 @@ const client = new QueryClient();
 
 
 const WagmiDemo: NextPage = () => {
-  const { address } = useAccount();
+  const { address, isConnected } = useAccount();
   const { connect, connectors } = useConnect();
   const { disconnect } = useDisconnect();
   const { signMessageAsync } = useSignMessage()
@@ -88,6 +88,10 @@ const WagmiDemo: NextPage = () => {
           <div>
             <h3>{address}</h3>
             <div>account</div>
+          </div>
+          <div>
+            <div>isConnected: <span>{String(isConnected)}</span></div>
+            
           </div>
 
           {!!signMessageAsync && <button onClick={() => signMessageAsync({ message: 'sign test msg' })}>sign msg</button>}
