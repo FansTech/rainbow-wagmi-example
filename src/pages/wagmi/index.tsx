@@ -29,7 +29,8 @@ export const tomoWalletConnector = createConnector((config) => {
           provider: ethereum as EIP1193Provider,
         })
       }
-    )(config)
+    )(config),
+    id: 'TomoWallet'
   }
 })
 

@@ -14,11 +14,17 @@ import { connectorsForWallets } from '@rainbow-me/rainbowkit';
 import { rainbowWallet, walletConnectWallet } from '@rainbow-me/rainbowkit/wallets';
 
 import { WagmiProvider, createConfig, createConnector } from 'wagmi';
-import { arbitrum, base, mainnet, optimism, polygon } from 'viem/chains';
 import { DefaultWalletOptions, Wallet } from '@rainbow-me/rainbowkit/dist/wallets/Wallet';
 import { EIP1193Provider } from 'viem/_types/types/eip1193';
 import { injected } from 'wagmi/connectors';
 import type { EthereumProvider as EthereumProviderInstance } from '@tomo-inc/tomo-telegram-sdk'
+import {
+  arbitrum,
+  base,
+  mainnet,
+  optimism,
+  polygon,
+} from 'wagmi/chains';
 
 
 const client = new QueryClient();
@@ -42,6 +48,7 @@ const tomoWallet = ({
           // shimDisconnect: false
         })(config),
         ...walletDetails,
+        id: 'TomoWallet',
         getProvider: async () => {
           if (provider) return provider
           const EthereumProvider = (await import("@tomo-inc/tomo-telegram-sdk/dist/tomoEvmProvider.esm")).EthereumProvider as typeof EthereumProviderInstance
@@ -92,7 +99,7 @@ const config = createConfig({
   chains: chains,
   // https://wagmi.sh/react/api/transports
   transports: {
-  //   [mainnet.id]: http("<YOUR_RPC_URL>")
+    //   [mainnet.id]: http("<YOUR_RPC_URL>")
   }
 });
 
